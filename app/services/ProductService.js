@@ -14,4 +14,11 @@ class ProductServiceList {
     });
     return data;
   };
+  findProductList = (id) => {
+    const data = this.productList.find((element) => {
+      if (element.id == id) return true;
+      return false;
+    });
+    return data;
+  };
 }

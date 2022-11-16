@@ -39,7 +39,7 @@
                     overflow: hidden;
                     box-shadow: rgb(0 0 0 / 30%) 0px 19px 38px, rgb(0 0 0 / 22%) 0px 15px 12px;
                     transition: 0.5s;
-                    font-size: 15px;
+                    font-size: 12px;
                     .img-container{
                         width: 185px;
                         height: 185px;
@@ -61,6 +61,10 @@
                         transition: 0.25s;
                         color: white;
                         font-size: 20px;
+                    }
+                    .qty-change div{
+                        display: flex;
+                        flex-direction: row;
                     }
                 }
             }
