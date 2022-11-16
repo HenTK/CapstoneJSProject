@@ -1,6 +1,20 @@
 var productService = new ProductService();
+var productServiceList = new ProductServiceList();
 function getProductsList() {
   productService.getList().then(function (response) {
+    productServiceList.productList = response.data.map((element) => {
+      const product = new Product(
+        element.name,
+        element.price,
+        element.screen,
+        element.backCamera,
+        element.frontCamera,
+        element.img,
+        element.desc,
+        element.type
+      );
+      return product;
+    });
     renderProductList(response.data);
   });
 }
@@ -28,6 +42,11 @@ function renderProductList(data) {
   console.log(content);
   document.getElementById("main-cart").innerHTML = content;
 }
+domId("selLoai").onchange = (event) => {
+  const value = event.target.value;
+  const data = productServiceList.filterProductList(value);
+  renderProductList(data);
+};
 window.onload = function () {
   getProductsList();
 };

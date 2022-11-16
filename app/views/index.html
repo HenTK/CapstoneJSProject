@@ -24,15 +24,25 @@
     <section id="app" class="app">
         <div class="app-container">
             <div class="banner">
-                <div id="main-cart" class="main-cart">
-
+                <div class="form-group row">
+                    <label for="selLoai" class="">Show</label>
+                    <div class="">
+                        <select class="custom-select" id="selLoai">
+                            <option selected="">Chọn loại</option>
+                            <option value="all">Tất cả</option>
+                            <option value="Samsung">Samsung</option>
+                            <option value="Iphone">Iphone</option>
+                        </select>
+                    </div>
                 </div>
+                <div id="main-cart" class="main-cart"></div>
             </div>
         </div>
     </section>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="../models/Products.js"></script>
     <script src="../services/Products.js"></script>
+    <script src="../services/ProductService.js"></script>
     <script src="../controllers/index.js"></script>
 </body>
 
