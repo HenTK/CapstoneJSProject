@@ -1,6 +1,6 @@
+var cart = [];
 var productService = new ProductService();
 var productServiceList = new ProductServiceList();
-var cart = [];
 function getProductsList() {
   productService.getList().then(function (response) {
     productServiceList.productList = response.data.map((element) => {
@@ -17,8 +17,8 @@ function getProductsList() {
       );
       return product;
     });
-    renderProductList(response.data);
   });
+  renderProductList(productServiceList.productList);
 }
 function domId(id) {
   return document.getElementById(id);
@@ -41,31 +41,23 @@ function renderProductList(data) {
         <button onclick="addItem(${data[i].id})" class="add-btn">ADD TO CART <i class="fas fa-chevron-right"></i></button>
         <span class="btn-add qty-change">
           <div>
-            <button class="btn-qty sub"><i class="fas fa-chevron-left"></i></button>
-            <p class="qty valueCart">1</p>
-            <button class="btn-qty add" onclick = "addCart()"><i class="fas fa-chevron-right"></i></button>
+            <button class="btn-qty sub" onclick = "removeCart(${data[i].id})"><i class="fas fa-chevron-left"></i></button>
+            <p class="qty valueCart"></p>
+            <button class="btn-qty add" onclick = "addCart(${data[i].id})"><i class="fas fa-chevron-right"></i></button>
           </div>
         </span>
     </div>
     `;
   }
-  console.log(content);
   document.getElementById("main-cart").innerHTML = content;
 }
 domId("selLoai").onchange = (event) => {
   const value = event.target.value;
   const data = productServiceList.filterProductList(value);
-  console.log(data);
   renderProductList(data);
 };
 window.onload = function () {
   getProductsList();
-};
-
-const addCart = () => {
-  // var cart = +document.querySelector(".valueCart").innerHTML;
-  // cart += 1;
-  // document.querySelector(".valueCart").innerHTML = cart;
 };
 
 const addItem = (id) => {
@@ -80,5 +72,51 @@ const addItem = (id) => {
     quantity: 1,
   };
   cart.push(cartItem);
-  console.log(cart);
+};
+
+let addCart = (id) => {
+  for (var i = 0; i < cart.length; i++) {
+    if (id == cart[i].product.id) {
+      cart[i].quantity++;
+      console.log(cart[i]);
+    }
+  }
+  renderCart(cart);
+};
+let removeCart = (id) => {
+  for (var i = 0; i < cart.length; i++) {
+    if (id == cart[i].product.id && cart[i].quantity > 0) {
+      cart[i].quantity--;
+      console.log(cart[i]);
+    }
+  }
+  renderCart(cart);
+};
+function renderCart(data) {
+  var content = "";
+  for (var i = 0; i < data.length; i++) {
+    content += `
+    <tr>
+      <td>${data[i].product.id}</td>
+      <td>${data[i].product.price}</td>
+      <td>${data[i].product.name}</td>
+      <td>${data[i].quantity}</td>
+      <td></td>
+    </tr>
+    `;
+    document.getElementById("tbodyP").innerHTML = content;
+  }
+}
+var cartShop = document.getElementById("body-cart-shop");
+var openCart = document.getElementById("cartOpen");
+var closeCart = document.getElementById("cartClose");
+let openCartModel = () => {
+  cartShop.classList.remove("none");
+  openCart.classList.add("none");
+  cartShop.classList.remove("changeBar");
+};
+let closeCartModel = () => {
+  cartShop.classList.add("none");
+  openCart.classList.remove("none");
+  cartShop.classList.add("changeBar");
 };

@@ -11,6 +11,54 @@
   position: relative;
   background: linear-gradient(to left, #8942a8, #ba382f);
   overflow: hidden;
+  transition: all 0.5s;
+}
+.app .app-container .banner .app-title {
+  font-size: 30px;
+  font-weight: 500;
+  color: white;
+  text-align: center;
+  margin-top: 30px;
+}
+.app .app-container .banner .form-group {
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 30px;
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+}
+.app .app-container .banner .form-group .app-label {
+  background-color: rgba(38, 2, 53, 0.7254901961);
+  padding: 2px 5px;
+  color: white;
+  border-radius: 3px 0 0 3px;
+}
+.app .app-container .banner .form-group .app-select {
+  padding-left: 0px;
+}
+.app .app-container .banner .form-group .app-select .custom-select {
+  font-size: 1rem;
+  display: block;
+  width: 150px;
+  text-align: center;
+  border-radius: 0 3px 3px 0;
+}
+.app .app-container .banner .cartIcon {
+  margin-top: 30px;
+  position: absolute;
+  font-size: 2rem;
+  top: 0;
+  right: 0;
+  color: black;
+  background-color: #8942a8;
+  border: none;
+  padding: 15px;
+  padding: none;
 }
 .app .app-container .banner .main-cart {
   display: flex;
@@ -66,4 +114,91 @@
 .app .app-container .banner .main-cart .card .qty-change div {
   display: flex;
   flex-direction: row;
+}
+.app .app-container .banner .card-transform .cart {
+  z-index: 101;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: width 2s;
+  background-color: rgb(46, 0, 251);
+  width: 50%;
+  height: 100vh;
+  -webkit-animation: mymoveIn 0.5s;
+          animation: mymoveIn 0.5s;
+  transition: all 0.5s;
+}
+.app .app-container .banner .card-transform .cart .closeCardBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 15px;
+  color: white;
+  background-color: rgb(0, 0, 0);
+  transition: all 0.5s;
+  font-size: 30px;
+}
+.app .app-container .banner .card-transform .cart h2 {
+  color: white;
+  text-align: center;
+}
+.app .app-container .banner .card-transform .cart .cart-items {
+  text-align: center;
+}
+.app .app-container .banner .card-transform .cart .cart-items span {
+  color: white;
+}
+.app .app-container .banner .card-transform .cart .cart-items .table .text-white {
+  color: white;
+}
+.app .app-container .banner .card-transform .cart .final {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 0 15px 15px 0;
+  transition: all 0.5s;
+}
+.app .app-container .banner .card-transform .cart .final .buy, .app .app-container .banner .card-transform .cart .final .clear {
+  font-size: 20px;
+  padding: 15px 5px;
+}
+.app .app-container .banner .card-transform .none {
+  display: none;
+}
+.app .app-container .banner .card-transform .changeBar {
+  animation-direction: reverse;
+}
+
+@-webkit-keyframes mymoveIn {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 50%;
+  }
+}
+
+@keyframes mymoveIn {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 50%;
+  }
+}
+@-webkit-keyframes mymoveOut {
+  0% {
+    width: 50%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+@keyframes mymoveOut {
+  0% {
+    width: 50%;
+  }
+  100% {
+    width: 0%;
+  }
 }/*# sourceMappingURL=style.css.map */

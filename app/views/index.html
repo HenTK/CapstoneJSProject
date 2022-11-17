@@ -24,9 +24,10 @@
     <section id="app" class="app">
         <div class="app-container">
             <div class="banner">
+                <div class="app-title">SIÊU THỊ ĐIỆN TỬ</div>
                 <div class="form-group row">
-                    <label for="selLoai" class="">Show</label>
-                    <div class="">
+                    <label for="selLoai" class="app-label">Show</label>
+                    <div class="app-select">
                         <select class="custom-select" id="selLoai">
                             <option selected="">Chọn loại</option>
                             <option value="all">Tất cả</option>
@@ -35,7 +36,44 @@
                         </select>
                     </div>
                 </div>
+                <button onclick="openCartModel()"><i id="cartOpen"
+                        class="fa-solid fa-cart-shopping cartIcon"></i></button>
                 <div id="main-cart" class="main-cart"></div>
+                <div class="card-transform" style="transition: all .5s;">
+                    <div id="body-cart-shop" class="cart none">
+                        <div class="overlay"></div>
+                        <div class="side-nav" style="right: 0px;">
+                            <button class="closeCardBtn" onclick="closeCartModel()"><i id="cartClose"
+                                    class="fas fa-times"></i></button>
+                            <h2>Cart</h2>
+                            <div class="cart-items">
+                                <span class="empty-cart">Looks Like You Haven't
+                                    Added Any Product In The Cart</span>
+                                <table class="table table-striped table-sm">
+                                    <thead>
+                                        <tr class="bg-warning text-white">
+                                            <th>ID</th>
+                                            <th>Giá</th>
+                                            <th>Tên</th>
+                                            <th>Số lượng</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyP"></tbody>
+                                </table>
+                            </div>
+                            <div class="final">
+                                <strong>Total: $ <span class="total">0</span></strong>
+                                <div class="action">
+                                    <button onclick="" class="btn buy">Purchase <i class="fas fa-credit-card"
+                                            style="color:#6665dd;"></i></button>
+                                    <button onclick="" class="btn clear">Clear Cart <i class="fas fa-trash"
+                                            style="color:#bb342f;"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
