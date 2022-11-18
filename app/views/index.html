@@ -40,8 +40,8 @@
                         class="fa-solid fa-cart-shopping cartIcon"></i></button>
                 <div id="main-cart" class="main-cart"></div>
                 <div class="card-transform" style="transition: all .5s;">
+                    <div id="overlay" class="none"></div>
                     <div id="body-cart-shop" class="cart none">
-                        <div class="overlay"></div>
                         <div class="side-nav" style="right: 0px;">
                             <button class="closeCardBtn" onclick="closeCartModel()"><i id="cartClose"
                                     class="fas fa-times"></i></button>
@@ -63,11 +63,11 @@
                                 </table>
                             </div>
                             <div class="final">
-                                <strong>Total: $ <span class="total">0</span></strong>
+                                <strong>Total: $ <span id="total" class="total">0</span></strong>
                                 <div class="action">
                                     <button onclick="" class="btn buy">Purchase <i class="fas fa-credit-card"
                                             style="color:#6665dd;"></i></button>
-                                    <button onclick="" class="btn clear">Clear Cart <i class="fas fa-trash"
+                                    <button onclick="clearCart()" class="btn clear">Clear Cart <i class="fas fa-trash"
                                             style="color:#bb342f;"></i></button>
                                 </div>
                             </div>

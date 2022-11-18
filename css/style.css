@@ -59,6 +59,11 @@
   border: none;
   padding: 15px;
   padding: none;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.app .app-container .banner .cartIcon:hover {
+  color: white;
 }
 .app .app-container .banner .main-cart {
   display: flex;
@@ -79,19 +84,25 @@
   justify-content: flex-start;
   position: relative;
   flex-shrink: 0;
-  height: 400px;
+  height: auto;
   width: 250px;
   background-color: #ffffff;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  transition: 0.5s;
+  transition: all 0.5s;
   font-size: 12px;
+  transition: all 0.5s;
+}
+.app .app-container .banner .main-cart .card .none {
+  display: none;
 }
 .app .app-container .banner .main-cart .card .img-container {
   width: 185px;
   height: 185px;
   align-self: center;
+  padding: 30px 20px;
+  margin-bottom: 100px;
 }
 .app .app-container .banner .main-cart .card .img-container img {
   width: 100%;
@@ -100,20 +111,71 @@
      object-fit: contain;
 }
 .app .app-container .banner .main-cart .card .details {
+  font-size: 10px;
   position: absolute;
-  height: 220px;
+  height: auto;
   width: 100%;
-  background-color: #7e7f82;
+  background-color: #d1d6e5;
   border-radius: 20px;
   padding: 20px;
-  bottom: -165px;
+  left: 0;
+  bottom: 0;
   transition: 0.25s;
-  color: white;
+}
+.app .app-container .banner .main-cart .card .details .title {
   font-size: 20px;
+}
+.app .app-container .banner .main-cart .card .details .info {
+  transition: all 0.5s;
+  display: none;
+}
+.app .app-container .banner .main-cart .card .details .display-info {
+  display: flex;
+  flex-direction: row;
+  vertical-align: bottom;
+  justify-content: space-between;
+}
+.app .app-container .banner .main-cart .card .details .display-info p {
+  font-size: 20px;
+  align-items: center;
+}
+.app .app-container .banner .main-cart .card .details .add-btn {
+  height: 40px;
+  border-radius: 20px;
+  border: solid;
+  border-width: 1px;
+  cursor: pointer;
+  font-size: 10px;
+  padding: 0 5px;
+  background-color: #d2d6e0;
 }
 .app .app-container .banner .main-cart .card .qty-change div {
   display: flex;
   flex-direction: row;
+}
+.app .app-container .banner .main-cart .card:hover .details .info {
+  transition: all 0.5s;
+  display: block;
+}
+.app .app-container .banner .main-cart .card:hover {
+  height: 350px;
+  scale: 1.3;
+}
+.app .app-container .banner .main-cart .none {
+  display: none;
+}
+.app .app-container .banner .card-transform #overlay {
+  top: 0;
+  right: 0;
+  position: absolute;
+  z-index: 100;
+  background-color: rgba(65, 18, 83, 0.4705882353);
+  width: 100%;
+  height: 100%;
+  -webkit-animation: mymoveIn 0.5s;
+          animation: mymoveIn 0.5s;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
 }
 .app .app-container .banner .card-transform .cart {
   z-index: 101;
@@ -121,7 +183,7 @@
   top: 0;
   right: 0;
   transition: width 2s;
-  background-color: rgb(46, 0, 251);
+  background-color: black;
   width: 50%;
   height: 100vh;
   -webkit-animation: mymoveIn 0.5s;
@@ -137,16 +199,26 @@
   background-color: rgb(0, 0, 0);
   transition: all 0.5s;
   font-size: 30px;
+  cursor: pointer;
+}
+.app .app-container .banner .card-transform .cart .closeCardBtn:hover {
+  color: rgba(255, 255, 255, 0.477);
 }
 .app .app-container .banner .card-transform .cart h2 {
   color: white;
   text-align: center;
+  font-size: 40px;
+  padding: 20px 0px;
 }
 .app .app-container .banner .card-transform .cart .cart-items {
   text-align: center;
 }
 .app .app-container .banner .card-transform .cart .cart-items span {
   color: white;
+}
+.app .app-container .banner .card-transform .cart .cart-items .table {
+  color: white;
+  width: 100%;
 }
 .app .app-container .banner .card-transform .cart .cart-items .table .text-white {
   color: white;
@@ -157,6 +229,7 @@
   right: 0;
   margin: 0 15px 15px 0;
   transition: all 0.5s;
+  color: white;
 }
 .app .app-container .banner .card-transform .cart .final .buy, .app .app-container .banner .card-transform .cart .final .clear {
   font-size: 20px;
