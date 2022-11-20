@@ -9,7 +9,7 @@
   height: 100vh;
   width: 100vw;
   position: relative;
-  background: linear-gradient(to left, #8942a8, #ba382f);
+  background: linear-gradient(to left, #0008ff, #ff1100);
   overflow: hidden;
   transition: all 0.5s;
 }
@@ -55,12 +55,25 @@
   top: 0;
   right: 0;
   color: black;
-  background-color: #8942a8;
   border: none;
   padding: 15px;
   padding: none;
   cursor: pointer;
   transition: all 0.5s;
+}
+.app .app-container .banner .cartIcon .quantity {
+  position: absolute;
+  top: 0;
+  right: 1%;
+  font-size: 15px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  padding: none;
+  margin: none;
+  border-radius: 50%;
+  color: red;
+  line-height: 20px;
 }
 .app .app-container .banner .cartIcon:hover {
   color: white;
@@ -94,6 +107,11 @@
   font-size: 12px;
   transition: all 0.5s;
 }
+.app .app-container .banner .main-cart .card .state {
+  text-align: right;
+  color: #8942a8;
+  padding-right: 15px;
+}
 .app .app-container .banner .main-cart .card .none {
   display: none;
 }
@@ -124,6 +142,7 @@
 }
 .app .app-container .banner .main-cart .card .details .title {
   font-size: 20px;
+  padding-bottom: 5px;
 }
 .app .app-container .banner .main-cart .card .details .info {
   transition: all 0.5s;
@@ -217,13 +236,24 @@
   color: white;
 }
 .app .app-container .banner .card-transform .cart .cart-items .table {
+  padding: 15px;
   color: white;
   width: 100%;
 }
 .app .app-container .banner .card-transform .cart .cart-items .table .text-white {
   color: white;
 }
+.app .app-container .banner .card-transform .cart .cart-items .table .trash {
+  cursor: pointer;
+}
+.app .app-container .banner .card-transform .cart .cart-items .table .quantityDec, .app .app-container .banner .card-transform .cart .cart-items .table .quantityInc {
+  cursor: pointer;
+}
 .app .app-container .banner .card-transform .cart .final {
+  width: 48%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   position: fixed;
   bottom: 0;
   right: 0;
@@ -231,9 +261,15 @@
   transition: all 0.5s;
   color: white;
 }
+.app .app-container .banner .card-transform .cart .final strong {
+  font-size: 20px;
+  -webkit-animation: mymoveIn 0.5s;
+          animation: mymoveIn 0.5s;
+}
 .app .app-container .banner .card-transform .cart .final .buy, .app .app-container .banner .card-transform .cart .final .clear {
   font-size: 20px;
   padding: 15px 5px;
+  cursor: pointer;
 }
 .app .app-container .banner .card-transform .none {
   display: none;
@@ -273,5 +309,27 @@
   }
   100% {
     width: 0%;
+  }
+}
+@-webkit-keyframes backgroundAnimate {
+  0% {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: 0%;
+  }
+}
+@keyframes backgroundAnimate {
+  0% {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: 0%;
   }
 }/*# sourceMappingURL=style.css.map */

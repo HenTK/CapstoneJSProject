@@ -36,8 +36,11 @@
                         </select>
                     </div>
                 </div>
-                <button onclick="openCartModel()"><i id="cartOpen"
-                        class="fa-solid fa-cart-shopping cartIcon"></i></button>
+                <button onclick="openCartModel()">
+                    <i id="cartOpen" class="fa-solid fa-cart-shopping cartIcon">
+                        <p id="cartQuantity" class="quantity">0</p>
+                    </i>
+                </button>
                 <div id="main-cart" class="main-cart"></div>
                 <div class="card-transform" style="transition: all .5s;">
                     <div id="overlay" class="none"></div>
@@ -65,7 +68,7 @@
                             <div class="final">
                                 <strong>Total: $ <span id="total" class="total">0</span></strong>
                                 <div class="action">
-                                    <button onclick="" class="btn buy">Purchase <i class="fas fa-credit-card"
+                                    <button onclick="clearCart()" class="btn buy">Purchase <i class="fas fa-credit-card"
                                             style="color:#6665dd;"></i></button>
                                     <button onclick="clearCart()" class="btn clear">Clear Cart <i class="fas fa-trash"
                                             style="color:#bb342f;"></i></button>

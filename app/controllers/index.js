@@ -34,6 +34,7 @@ function renderProductList(data) {
   for (var i = 0; i < data.length; i++) {
     content += `
     <div class = "card">
+        <i class = "state">In stock</i>
         <div class = "img-container">
             <img src="${data[i].img}" alt="">
         </div>
@@ -61,11 +62,12 @@ domId("selLoai").onchange = (event) => {
 };
 window.onload = function () {
   getProductsList();
+  getProductListFromLocalStorage();
 };
 
 const addItem = (id) => {
+  let quantity = 0;
   const value = productServiceList.findProductList(id);
-
   var cartItem = {
     product: {
       id: value.id,
@@ -81,6 +83,8 @@ const addItem = (id) => {
   }
   cart.push(cartItem);
   renderCart(cart);
+  renderQuantity();
+  setLocalStorage();
 };
 
 let addCart = (id) => {
@@ -94,6 +98,8 @@ let addCart = (id) => {
     }
   }
   renderCart(cart);
+  renderQuantity();
+  setLocalStorage();
 };
 let removeCart = (id) => {
   var quantity;
@@ -106,6 +112,8 @@ let removeCart = (id) => {
     }
   }
   renderCart(cart);
+  renderQuantity();
+  setLocalStorage();
 };
 function quantityValue(quantity) {
   return quantity;
@@ -119,11 +127,11 @@ function renderCart(data) {
       <td>$${data[i].product.price}</td>
       <td>${data[i].product.name}</td>
       <td>
-      <button onclick = "removeCart(${data[i].product.id})"><i class="fa-solid fa-minus"></i></button>
+      <button class = "quantityDec" onclick = "removeCart(${data[i].product.id})"><i class="fa-solid fa-minus"></i></button>
       ${data[i].quantity}
-      <button onclick = "addCart(${data[i].product.id})"><i class="fa-solid fa-plus"></i></button>
+      <button class = "quantityInc" onclick = "addCart(${data[i].product.id})"><i class="fa-solid fa-plus"></i></button>
       </td>
-      <td><i class="fa-solid fa-trash"></i></td>
+      <td><i class="fa-solid fa-trash trash" onclick = "deleteModal(${data[i].product.id})"></i></td>
     </tr>
     `;
   }
@@ -157,5 +165,45 @@ function clearCart() {
   cart = [];
   MoneyPay = 0;
   console.log(cart);
-  renderCart();
+  renderCart(cart);
+  renderQuantity();
+  setLocalStorage();
 }
+
+let renderQuantity = () => {
+  var totalQuantity = 0;
+  for (var i = 0; i < cart.length; i++) {
+    totalQuantity += cart[i].quantity;
+  }
+  document.getElementById("cartQuantity").innerHTML = totalQuantity;
+};
+
+function deleteModal(id) {
+  for (var i = 0; i < cart.length; i++) {
+    if (id == cart[i].product.id) {
+      cart.splice(i, 1);
+    }
+  }
+  renderCart(cart);
+  renderQuantity();
+}
+
+const setLocalStorage = () => {
+  const stringify = JSON.stringify(cart);
+  localStorage.setItem("PRODUCT_LIST_KEY", stringify);
+};
+
+const getLocalStorage = () => {
+  const stringify = localStorage.getItem("PRODUCT_LIST_KEY");
+  if (stringify) {
+    return JSON.parse(stringify);
+  }
+  return cart;
+};
+
+const getProductListFromLocalStorage = () => {
+  const data = getLocalStorage();
+  cart = data;
+  renderCart(cart);
+  renderQuantity();
+};
