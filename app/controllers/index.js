@@ -63,6 +63,11 @@ domId("selLoai").onchange = (event) => {
 window.onload = function () {
   getProductsList();
   getProductListFromLocalStorage();
+  if (cart[0].quantity == "") {
+    document.getElementById("empty-cart").style.display = "block";
+  } else {
+    document.getElementById("empty-cart").style.display = "none";
+  }
 };
 
 const addItem = (id) => {
@@ -73,6 +78,7 @@ const addItem = (id) => {
       id: value.id,
       price: value.price,
       name: value.name,
+      image: value.img,
     },
     quantity: 1,
   };
@@ -123,7 +129,7 @@ function renderCart(data) {
   for (var i = 0; i < data.length; i++) {
     content += `
     <tr>
-      <td>${data[i].product.id}</td>
+      <td><img class = "renderCartProducts" src="${data[i].product.image}" alt=""></td>
       <td>$${data[i].product.price}</td>
       <td>${data[i].product.name}</td>
       <td>
