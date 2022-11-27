@@ -1,12 +1,12 @@
-var cart = [];
-var productService = new ProductService();
-var productServiceList = new ProductServiceList();
-var cartShop = document.getElementById("body-cart-shop");
-var openCart = document.getElementById("cartOpen");
-var closeCart = document.getElementById("cartClose");
-var cartoverlay = document.getElementById("overlay");
-var MoneyPay = 0;
-function getProductsList() {
+let cart = [];
+let productService = new ProductService();
+let productServiceList = new ProductServiceList();
+let cartShop = document.getElementById("body-cart-shop");
+let openCart = document.getElementById("cartOpen");
+let closeCart = document.getElementById("cartClose");
+let cartoverlay = document.getElementById("overlay");
+
+let getProductsList = () => {
   productService.getList().then(function (response) {
     productServiceList.productList = response.data.map((element) => {
       const product = new Product(
@@ -24,42 +24,46 @@ function getProductsList() {
     });
   });
   renderProductList(productServiceList.productList);
-}
-function domId(id) {
-  return document.getElementById(id);
-}
-function renderProductList(data) {
+};
+
+let domId = (id) => document.getElementById(id);
+
+let renderProductList = (data) => {
   var content = "";
   var pos = 0;
-  for (var i = 0; i < data.length; i++) {
+
+  data.forEach((element) => {
     content += `
     <div class = "card">
         <i class = "state">In stock</i>
         <div class = "img-container">
-            <img src="${data[i].img}" alt="">
+            <img src="${element.img}" alt="">
         </div>
         <div class = "details">
-              <p class = "title">Loại: ${data[i].type}</p>
-              <p class = "info">${data[i].desc}</p>
-              <p class = "info">Tên: ${data[i].name}</p>
-              <p class = "info">Màn hình: ${data[i].screen}</p>
-              <p class = "info">Camera trước: ${data[i].backCamera}</p>
-              <p class = "info">Camera sau: ${data[i].frontCamera}</p>
+              <p class = "title">Loại: ${element.type}</p>
+              <p class = "info">${element.desc}</p>
+              <p class = "info">Tên: ${element.name}</p>
+              <p class = "info">Màn hình: ${element.screen}</p>
+              <p class = "info">Camera trước: ${element.backCamera}</p>
+              <p class = "info">Camera sau: ${element.frontCamera}</p>
               <div class = "display-info">
-                <p class = "">$${data[i].price}</p>
-                <button onclick="addItem(${data[i].id})" class="add-btn">ADD TO CART <i class="fas fa-chevron-right"></i></button>   
+                <p class = "">$${element.price}</p>
+                <button onclick="addItem(${element.id})" class="add-btn">ADD TO CART <i class="fas fa-chevron-right"></i></button>   
               </div>         
         </div>
     </div>
     `;
-  }
+  });
+
   document.getElementById("main-cart").innerHTML = content;
-}
+};
+
 domId("selLoai").onchange = (event) => {
   const value = event.target.value;
   const data = productServiceList.filterProductList(value);
   renderProductList(data);
 };
+
 window.onload = function () {
   getProductsList();
   getProductListFromLocalStorage();
@@ -67,6 +71,7 @@ window.onload = function () {
     document.getElementById("empty-cart").style.display = "block";
   } else {
     document.getElementById("empty-cart").style.display = "none";
+    total(cart);
   }
 };
 
@@ -87,64 +92,73 @@ const addItem = (id) => {
       return 0;
     }
   }
+
   cart.push(cartItem);
   renderCart(cart);
   renderQuantity();
   setLocalStorage();
+  total(cart);
 };
 
 let addCart = (id) => {
   var quantity;
-  for (var i = 0; i < cart.length; i++) {
-    if (id == cart[i].product.id) {
-      cart[i].quantity++;
-      MoneyPay += +cart[i].product.price;
-      console.log(MoneyPay);
-      quantity = quantityValue(cart[i].quantity);
+
+  cart.forEach((element) => {
+    if (element.product.id == id) {
+      element.quantity++;
+      quantity = quantityValue(element.quantity);
     }
-  }
+  });
+
   renderCart(cart);
   renderQuantity();
   setLocalStorage();
+  total(cart);
 };
+
 let removeCart = (id) => {
   var quantity;
-  for (var i = 0; i < cart.length; i++) {
-    if (id == cart[i].product.id && cart[i].quantity > 0) {
-      cart[i].quantity--;
-      MoneyPay -= +cart[i].product.price;
-      console.log(MoneyPay);
-      quantity = quantityValue(cart[i].quantity);
+  // for (var i = 0; i < cart.length; i++) {
+  //   if (id == cart[i].product.id && cart[i].quantity > 0) {
+  //     cart[i].quantity--;
+  //     quantity = quantityValue(cart[i].quantity);
+  //   }
+  // }
+  cart.forEach((element) => {
+    if (element.product.id == id) {
+      element.quantity--;
+      quantity = quantityValue(element.quantity);
     }
-  }
+  });
   renderCart(cart);
   renderQuantity();
   setLocalStorage();
+  total(cart);
 };
-function quantityValue(quantity) {
-  return quantity;
-}
-function renderCart(data) {
+
+let quantityValue = (quantity) => quantity;
+
+let renderCart = (data) => {
   var content = "";
-  for (var i = 0; i < data.length; i++) {
+
+  data.forEach((element) => {
     content += `
     <tr>
-      <td><img class = "renderCartProducts" src="${data[i].product.image}" alt=""></td>
-      <td>$${data[i].product.price}</td>
-      <td>${data[i].product.name}</td>
+      <td><img class = "renderCartProducts" src="${element.product.image}" alt=""></td>
+      <td>$${element.product.price}</td>
+      <td>${element.product.name}</td>
       <td>
-      <button class = "quantityDec" onclick = "removeCart(${data[i].product.id})"><i class="fa-solid fa-minus"></i></button>
-      ${data[i].quantity}
-      <button class = "quantityInc" onclick = "addCart(${data[i].product.id})"><i class="fa-solid fa-plus"></i></button>
+      <button class = "quantityDec" onclick = "removeCart(${element.product.id})"><i class="fa-solid fa-minus"></i></button>
+      ${element.quantity}
+      <button class = "quantityInc" onclick = "addCart(${element.product.id})"><i class="fa-solid fa-plus"></i></button>
       </td>
-      <td><i class="fa-solid fa-trash trash" onclick = "deleteModal(${data[i].product.id})"></i></td>
+      <td><i class="fa-solid fa-trash trash" onclick = "deleteModal(${element.product.id})"></i></td>
     </tr>
     `;
-  }
+  });
 
   document.getElementById("tbodyP").innerHTML = content;
-  document.getElementById("total").innerHTML = "" + MoneyPay;
-}
+};
 
 let openCartModel = () => {
   cartShop.classList.remove("none");
@@ -163,36 +177,53 @@ let closeCartModel = () => {
 };
 
 let total = (cart) => {
-  MoneyPay += +cart.product.money * +cart.quantity;
-  document.querySelector("total").innerHTML = MoneyPay;
+  let quantity = cart.reduce((total, element) => {
+    total += +element.quantity * +element.product.price;
+    return total;
+  }, 0);
+  console.log(quantity, typeof quantity);
+  document.getElementById("total").innerHTML = quantity;
 };
 
-function clearCart() {
+let clearCart = () => {
   cart = [];
-  MoneyPay = 0;
   console.log(cart);
   renderCart(cart);
   renderQuantity();
   setLocalStorage();
-}
+  total(cart);
+};
 
 let renderQuantity = () => {
   var totalQuantity = 0;
-  for (var i = 0; i < cart.length; i++) {
-    totalQuantity += cart[i].quantity;
-  }
+
+  cart.forEach((element) => {
+    totalQuantity += element.quantity;
+  });
+
+  // for (var i = 0; i < cart.length; i++) {
+  //   totalQuantity += cart[i].quantity;
+  // }
+
   document.getElementById("cartQuantity").innerHTML = totalQuantity;
 };
 
-function deleteModal(id) {
-  for (var i = 0; i < cart.length; i++) {
-    if (id == cart[i].product.id) {
-      cart.splice(i, 1);
+let deleteModal = (id) => {
+  cart.forEach((element) => {
+    if (id == element.product.id) {
+      cart.splice(element.i, 1);
     }
-  }
+  });
+  // for (var i = 0; i < cart.length; i++) {
+  //   if (id == cart[i].product.id) {
+  //     cart.splice(i, 1);
+  //   }
+  // }
   renderCart(cart);
   renderQuantity();
-}
+  setLocalStorage();
+  total(cart);
+};
 
 const setLocalStorage = () => {
   const stringify = JSON.stringify(cart);
